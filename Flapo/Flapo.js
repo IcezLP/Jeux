@@ -1,7 +1,6 @@
 var bird;
 var pipes = [];
 var score = 0;
-var maxScore = 0;
 function setup() {
   createCanvas(500,500);
   bird = new Bird();
@@ -35,7 +34,6 @@ function draw() {
   function showScores() {
   textSize(32);
   text('score: ' + score, 1, 32);
-  text('record: ' + maxScore, 1, 64);
 }
 
   if (frameCount % 90 == 0) {
