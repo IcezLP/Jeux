@@ -36,7 +36,7 @@ function draw() {
   text('score: ' + score, 1, 32);
 }
 
-  if (frameCount % 90 == 0) {
+  if (frameCount % 60 == 0) {
   pipes.push(new Pipe());
   }
 
