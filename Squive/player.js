@@ -8,7 +8,7 @@ function Player() {
  
  this.show = function() {
   fill(238, 238, 198);
-  ellipse(this.x, this.y, 5, 5);
+  ellipse(this.x, this.y, 22, 22);
  }
  
  this.up = function() {
