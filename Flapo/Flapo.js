@@ -39,9 +39,6 @@ function draw() {
   if (frameCount % 60 == 0) {
   pipes.push(new Pipe());
   }
-
-
-
 }
 
 function keyPressed(){
