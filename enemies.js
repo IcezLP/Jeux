@@ -5,17 +5,15 @@ function Enemies() {
   this.w = random(width/4);
   this.speed = 7;
   
-  this.highlight = false;
+  this.pased = false;
   
   this.hits = function(player) {
    if (player.y < this.top || player.y > height - this.bottom) {
      if (player.x >this.x && player.x < this.x + this.w) {
-       this.highlight = true;
        this.passed = true;
        return true;
      } 
    }
-   this.highlight = false;
    return false;
   }
   
