@@ -25,9 +25,6 @@ var LEVELS = [
    "                                                                                "],
 ];
 
-// I used online Map generator to generate this map, you an do this too, or use the same map using the source code in the description
-
-
 function Vector(x, y) {
 	this.x = x; this.y = y;
 }
@@ -40,7 +37,6 @@ Vector.prototype.times = function(scale) {
 	return new Vector(this.x * scale, this.y * scale);
 };
 
-// Note: uppercase words are used that means constructor are values
 var actorchars =  {
 	"@": Player,
 	"o": Coin,
@@ -171,13 +167,11 @@ DOMDisplay.prototype.drawFrame = function() {
 };
 
 
-// clear it later
 DOMDisplay.prototype.scrollPlayerIntoView = function() {
   var width = this.wrap.clientWidth;
   var height = this.wrap.clientHeight;
   var margin = width / 3;
 
-  // The viewport
   var left = this.wrap.scrollLeft, right = left + width;
   var top = this.wrap.scrollTop, bottom = top + height;
 
