@@ -15,3 +15,10 @@ Dernière MAJ:
   - Ajout Record
   
 ===================
+
+MagneToi:
+Commencé le 08/04/18
+url = https://icezlp.github.io/Jeux/MagneToi/
+Dernière MAJ:
+  
+===================
