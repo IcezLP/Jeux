@@ -14,8 +14,8 @@ var LEVELS = [
    "  xx                                      o o                                x  ",
    "  x                     o                                                    x  ",
    "  x                                      xxxxx                             o x  ",
-   "  x          xxxx       o                                                    x  ",
-   "  x  @       x  x                                                xxxxx       x  ",
+   "  x  @       xxxx       o                                                    x  ",
+   "  x          x  x                                                xxxxx       x  ",
    "  xxxxxxxxxxxx  xxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxxxxx     xxxxxxx   xxxxxxxxx  ",
    "                              x   x                  x     x                    ",
    "                              x!!!x                  x!!!!!x                    ",
@@ -23,54 +23,128 @@ var LEVELS = [
    "                              xxxxx                  xxxxxxx                    ",
    "                                                                                ",
    "                                                                                "],
+  ["                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                                                                ",
+   "                                    xxx  xxx                                    ",
+   "                                    xvx  xvx                                    ",
+   "  xx                                                                        xx  ",
+   "  x                                                                          x  ",
+   "  x                          o                    o                          x  ",
+   "  x                                    xx                                    x  ",
+   "  x  @           o       x!x!x!x!x            x!x!x!x!x       o              x  ",
+   "  xxxxxxxx     xxxxx     xxxxxxxxx            xxxxxxxxx     xxxxx     xxxxxxxx  ",
+   "         x                                                            x         ",
+   "         x!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!x         ",
+   "         x!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!x         ",
+   "         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx         ",
+   "                                                                                ",
+   "                                                                                "],
+  ["                                                                                ",
+   "  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ",
+   "  x    x                                                                     x  ",
+   "  x                                                                          x  ",
+   "  x  o                                                                       x  ",
+   "  xx!x!x                                                                     x  ",
+   "  xxxxxx                         o             o                             x  ",
+   "  x                                                                          x  ",
+   "  x         x             o      x             x                             x  ",
+   "  x                              x      o      x                             x  ",
+   "  x                o      x      x             x                             x  ",
+   "  x                       x      x      x      x                             x  ",
+   "  x         o      x      x      x      x      x                             x  ",
+   "  x                x      x      x      x      x                             x  ",
+   "  x         x      x      x      x      x      x                   @         x  ",
+   "  x  x      x      x      x      x      x      x                   x         x  ",
+   "  x!!!!!!!!!x!!!!!!x!!!!!!x!!!!!!x!!!!!!x!!!!!!x!!!!!!x!!!!!!x!!!!!!! !!!!!!!x  ",
+   "  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxx  ",
+   "                                                                    x x         ",
+   "                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx x         ",
+   "                      x                                               x         ",
+   "                      x                                               x         ",
+   "                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx!x         ",
+   "                                                                                "],
+  ["                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "    xxxxx              x                                                        ",
+    "                  x    x                                                        ",
+    "            x     x    x                                                        ",
+    "  @    !    x     x    x                                                        ",
+    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                ",
+    "                                                                                "
+  ],
 ];
 
 function Vector(x, y) {
-	this.x = x; this.y = y;
+  this.x = x;
+  this.y = y;
 }
 
 Vector.prototype.plus = function(other) {
-	return new Vector(this.x + other.x, this.y + other.y);
+  return new Vector(this.x + other.x, this.y + other.y);
 };
 
 Vector.prototype.times = function(scale) {
-	return new Vector(this.x * scale, this.y * scale);
+  return new Vector(this.x * scale, this.y * scale);
 };
 
-var actorchars =  {
-	"@": Player,
-	"o": Coin,
-	"=": Lava,
-	"|": Lava,
-	"v": Lava
+var actorchars = {
+  "@": Player,
+  "o": Coin,
+  "=": Lava,
+  "|": Lava,
+  "v": Lava,
 };
 
 function Player(pos) {
-	this.pos = pos.plus(new Vector(0, -.5));
-	this.size = new Vector(.5, 1);
-	this.speed = new Vector(0, 0);
+  this.pos = pos.plus(new Vector(0, -.5));
+  this.size = new Vector(.5, 1);
+  this.speed = new Vector(0, 0);
 }
 Player.prototype.type = "player";
 
 function Lava(pos, ch) {
-	this.pos = pos;
-	this.size = new Vector(1, 1);
-	if (ch === "=")
-		this.speed = new Vector(2, 0);
-	else if (ch === '|')
-		this.speed = new Vector(0, 2);
-	else if (ch === 'v'){
-		this.speed = new Vector(0, 3);
-		this.repeatPos = pos;
-	}
+  this.pos = pos;
+  this.size = new Vector(1, 1);
+  if (ch === "=")
+    this.speed = new Vector(2, 0);
+  else if (ch === '|')
+    this.speed = new Vector(0, 2);
+  else if (ch === 'v') {
+    this.speed = new Vector(0, 3);
+    this.repeatPos = pos;
+  }
 }
 Lava.prototype.type = "Lava";
 
 function Coin(pos) {
-	this.basePos = this.pos = pos;
-	this.size = new Vector(.6, .6);
-	// take a look back
-	this.wobble = Math.random() * Math.PI * 2;
+  this.basePos = this.pos = pos;
+  this.size = new Vector(.6, .6);
+  // take a look back
+  this.wobble = Math.random() * Math.PI * 2;
 }
 Coin.prototype.type = "coin";
 
@@ -79,91 +153,93 @@ Level.prototype.isFinished = function() {
 };
 
 function Level(plan) {
-	this.width = plan[0].length;
-	this.height = plan.length;
-	this.grid = [];
-	this.actors = [];
+  this.width = plan[0].length;
+  this.height = plan.length;
+  this.grid = [];
+  this.actors = [];
 
-	for (var y = 0; y < this.height; y++) {
-		var line = plan[y],  gridLine = [];
-		for (var x = 0; x < this.width; x++) {
-			var ch = line[x], fieldType = null;
-			var Actor = actorchars[ch];
-			if (Actor)
-				this.actors.push(new Actor(new Vector(x, y), ch));
-			else if (ch === "x")
-				fieldType = "wall";
-			else if (ch === "!")
-				fieldType = "lava";
-			else if (ch === "|")
-				fieldType = "lava";
-			else if (ch === "=")
-				fieldType = "lava";
-			else if (ch === "v"){
-				fieldType = "lava";
-				console.log(fieldType);
-			}
-			gridLine.push(fieldType)
-		}
-		this.grid.push(gridLine);
-	}
-	this.player = this.actors.filter(function(actor) {
-		return actor.type === "player"
-	})[0];
-	this.status = this.finishDelay = null;
+  for (var y = 0; y < this.height; y++) {
+    var line = plan[y],
+      gridLine = [];
+    for (var x = 0; x < this.width; x++) {
+      var ch = line[x],
+        fieldType = null;
+      var Actor = actorchars[ch];
+      if (Actor)
+        this.actors.push(new Actor(new Vector(x, y), ch));
+      else if (ch === "x")
+        fieldType = "wall";
+      else if (ch === "!")
+        fieldType = "lava";
+      else if (ch === "|")
+        fieldType = "lava";
+      else if (ch === "=")
+        fieldType = "lava";
+      else if (ch === "v") {
+        fieldType = "lava";
+        console.log(fieldType);
+      }
+      gridLine.push(fieldType)
+    }
+    this.grid.push(gridLine);
+  }
+  this.player = this.actors.filter(function(actor) {
+    return actor.type === "player"
+  })[0];
+  this.status = this.finishDelay = null;
 }
 
 function element(name, className) {
-	var elem = document.createElement(name);
-	if(className) elem.className = className;
-	return elem;
+  var elem = document.createElement(name);
+  if (className) elem.className = className;
+  return elem;
 }
 
 function DOMDisplay(parent, level) {
-	this.wrap = parent.appendChild(element("div", "game"));
-	this.level = level;
+  this.wrap = parent.appendChild(element("div", "game"));
+  this.level = level;
 
-	this.wrap.appendChild(this.drawBackground());
-	this.actorLayer = null;
-	this.drawFrame();
+  this.wrap.appendChild(this.drawBackground());
+  this.actorLayer = null;
+  this.drawFrame();
 }
 
 
-var scale = 15;
+var scale = 23;
 
 
 DOMDisplay.prototype.drawBackground = function() {
-	var table = element("table", "background");
-	table.style.width = this.level.width * scale + "px";
-	table.style.height = this.level.height * scale + "px";
-	this.level.grid.forEach(function(row) {
-  var rowElement = table.appendChild(element("tr"));
-		rowElement.style.height = scale + "px";
-		row.forEach(function(type) {
-			rowElement.appendChild(element("td", type));
-		});
-	});
-	return table;
+  var table = element("table", "background");
+  table.style.width = this.level.width * scale + "px";
+  table.style.height = this.level.height * scale + "px";
+  this.level.grid.forEach(function(row) {
+    var rowElement = table.appendChild(element("tr"));
+    rowElement.style.height = scale + "px";
+    row.forEach(function(type) {
+      rowElement.appendChild(element("td", type));
+    });
+  });
+  return table;
 };
 
 DOMDisplay.prototype.drawActors = function() {
-	var wrap = element("div");
-	this.level.actors.forEach(function(actor) {
-		var rect = wrap.appendChild(element("div", "actor " + actor.type));
-		rect.style.width = actor.size.x * scale + "px";
-		rect.style.height = actor.size.y * scale + "px";
-		rect.style.left = actor.pos.x * scale + "px";
-		rect.style.top = actor.pos.y * scale + "px";
-	});
-	return wrap;
+  var wrap = element("div");
+  this.level.actors.forEach(function(actor) {
+    var rect = wrap.appendChild(element("div", "actor " + actor.type));
+    rect.style.width = actor.size.x * scale + "px";
+    rect.style.height = actor.size.y * scale + "px";
+    rect.style.left = actor.pos.x * scale + "px";
+    rect.style.top = actor.pos.y * scale + "px";
+  });
+  return wrap;
 }
 
 DOMDisplay.prototype.drawFrame = function() {
-	if (this.actorLayer)
-		this.wrap.removeChild(this.actorLayer);
-	this.actorLayer = this.wrap.appendChild(this.drawActors());
-	this.wrap.className = "game " + (this.level.status || "");
-	this.scrollPlayerIntoView();
+  if (this.actorLayer)
+    this.wrap.removeChild(this.actorLayer);
+  this.actorLayer = this.wrap.appendChild(this.drawActors());
+  this.wrap.className = "game " + (this.level.status || "");
+  this.scrollPlayerIntoView();
 };
 
 
@@ -172,12 +248,14 @@ DOMDisplay.prototype.scrollPlayerIntoView = function() {
   var height = this.wrap.clientHeight;
   var margin = width / 3;
 
-  var left = this.wrap.scrollLeft, right = left + width;
-  var top = this.wrap.scrollTop, bottom = top + height;
+  var left = this.wrap.scrollLeft,
+    right = left + width;
+  var top = this.wrap.scrollTop,
+    bottom = top + height;
 
   var player = this.level.player;
   var center = player.pos.plus(player.size.times(0.5))
-                 .times(scale);
+    .times(scale);
 
   if (center.x < left + margin)
     this.wrap.scrollLeft = center.x - margin;
@@ -190,7 +268,7 @@ DOMDisplay.prototype.scrollPlayerIntoView = function() {
 };
 
 DOMDisplay.prototype.clear = function() {
-	this.wrap.parentNode.removeChild(this.wrap);
+  this.wrap.parentNode.removeChild(this.wrap);
 };
 
 Level.prototype.obstacleAt = function(pos, size) {
@@ -215,10 +293,10 @@ Level.prototype.actorAt = function(actor) {
   for (var i = 0; i < this.actors.length; i++) {
     var other = this.actors[i];
     if (other != actor &&
-        actor.pos.x + actor.size.x > other.pos.x &&
-        actor.pos.x < other.pos.x + other.size.x &&
-        actor.pos.y + actor.size.y > other.pos.y &&
-        actor.pos.y < other.pos.y + other.size.y)
+      actor.pos.x + actor.size.x > other.pos.x &&
+      actor.pos.x < other.pos.x + other.size.x &&
+      actor.pos.y + actor.size.y > other.pos.y &&
+      actor.pos.y < other.pos.y + other.size.y)
       return other;
   }
 };
@@ -249,7 +327,8 @@ Lava.prototype.act = function(step, level) {
     this.speed = this.speed.times(-1);
 };
 
-var wobbleSpeed = 8, wobbleDist = 0.07;
+var wobbleSpeed = 8,
+  wobbleDist = 0.07;
 
 Coin.prototype.act = function(step) {
   this.wobble += step * wobbleSpeed;
@@ -317,18 +396,23 @@ Level.prototype.playerTouched = function(type, actor) {
       return other != actor;
     });
     if (!this.actors.some(function(actor) {
-      return actor.type == "coin";
-    })) {
+        return actor.type == "coin";
+      })) {
       this.status = "won";
       this.finishDelay = 1;
     }
   }
 };
 
-var arrowCodes = {37: "left", 38: "up", 39: "right"};
+var arrowCodes = {
+  37: "left",
+  38: "up",
+  39: "right"
+};
 
 function trackKeys(codes) {
   var pressed = Object.create(null);
+
   function handler(event) {
     if (codes.hasOwnProperty(event.keyCode)) {
       var down = event.type == "keydown";
@@ -343,6 +427,7 @@ function trackKeys(codes) {
 
 function runAnimation(frameFunc) {
   var lastTime = null;
+
   function frame(time) {
     var stop = false;
     if (lastTime != null) {
@@ -380,7 +465,7 @@ function runGame(plans, Display) {
       else if (n < plans.length - 1)
         startLevel(n + 1);
       else
-        alert("Ta gagné!");
+        alert("GG");
     });
   }
   startLevel(0);

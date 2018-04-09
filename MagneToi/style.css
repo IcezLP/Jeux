@@ -1,5 +1,8 @@
 body {
-  background: #222;
+/*background: #222;*/
+  background-image: url(back.png);
+  background-position: center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,13 +23,14 @@ h2, li {
   padding: 0;
 }
 
-.lava, .actor {
+.lava {
   background: #F35052;
 }
 
 .wall {
-  background: #444;
-  border: solid 3px #333;
+  background-image: url(cube.png);
+  background-position: center;
+  background-size: cover;
   box-sizing: content-box;
 }
 
@@ -35,16 +39,21 @@ h2, li {
 }
 
 .coin {
-  background: #E2E805;
-  border-radius: 100px;
+  background-image: url(coin.png);
+  background-position: center;
+  background-size: cover;
 }
 
 .player {
-  background: #52f3c2;
+  background-image: url(mario.png);
+  background-position: center;
+  background-size: cover;
 }
 
 .lost .player {
-  background: #a04040;
+  background-image: url(mariomort.png);
+  background-position: center;
+  background-size: cover;
 }
 
 .won .player {
