@@ -23,7 +23,7 @@ h2, li {
   padding: 0;
 }
 
-.lava {
+.lava /*, .actor */{
   background: #F35052;
 }
 
